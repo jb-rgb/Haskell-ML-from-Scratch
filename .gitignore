@@ -1,0 +1,21 @@
+# Compilación Haskell (Cabal / Stack / GHC)
+dist-newstyle/
+.stack-work/
+cabal.sandbox.config
+.cabal-sandbox/
+*.hi
+*.o
+
+# Datasets y Modelos (MNIST)
+data/*.csv
+data/*.idx1-ubyte
+data/*.idx3-ubyte
+data/*.gz
+
+# Entornos de Desarrollo (IDEs)
+.vscode/
+.idea/
+
+# Archivos del Sistema Operativo
+.DS_Store
+*~
