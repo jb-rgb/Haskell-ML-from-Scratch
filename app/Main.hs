@@ -1,16 +1,23 @@
 module Main where
 
 import DataLoader (loadMNIST)
+import KNN (knnClassify)
 
 main :: IO ()
 main = do
     putStrLn "Cargando el dataset MNIST..."
     dataset <- loadMNIST "data/mnist_train.csv"
     
-    putStrLn $ "Total de imágenes cargadas: " ++ show (length dataset)
+    let trainSubset = take 1000 dataset
+        (targetLabel, targetVector) = dataset !! 1000
+
+    putStrLn "Iniciando clasificación k-NN (k=3)..."
+
+    let prediction = knnClassify 3 trainSubset targetVector
+
+    putStrLn $ "Predicción del modelo: " ++ show prediction
+    putStrLn $ "Etiqueta real: " ++ show targetLabel
     
-    case dataset of
-        ((primeraEtiqueta, primerosPixeles):_) -> do
-            putStrLn $ "Etiqueta de la primera imagen: " ++ show primeraEtiqueta
-            putStrLn $ "Dimensiones del vector de la primera imagen: " ++ show (length primerosPixeles)
-        [] -> putStrLn "Error: El dataset está vacío."
+    if prediction == targetLabel
+        then putStrLn "¡El modelo acertó!"
+        else putStrLn "El modelo falló esta vez."    

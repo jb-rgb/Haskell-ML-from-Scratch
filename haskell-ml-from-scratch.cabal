@@ -6,7 +6,7 @@ author:             Jorge Arturo Barahona de la Cruz
 build-type:         Simple
 
 library
-    exposed-modules:  MathCore, DataLoader
+    exposed-modules:  MathCore, DataLoader, KNN
     hs-source-dirs:   src
     build-depends:    base >= 4.7 && < 5
     default-language: Haskell2010
