@@ -1,9 +1,16 @@
 module Main where
 
-import MathCore (euclideanDistance)
+import DataLoader (loadMNIST)
 
 main :: IO ()
 main = do
-    putStrLn "Initializing ML Engine..."
-    let dist = euclideanDistance [1.0, 2.0] [4.0, 6.0]
-    putStrLn $ "Test distance: " ++ show dist
+    putStrLn "Cargando el dataset MNIST..."
+    dataset <- loadMNIST "data/mnist_train.csv"
+    
+    putStrLn $ "Total de imágenes cargadas: " ++ show (length dataset)
+    
+    case dataset of
+        ((primeraEtiqueta, primerosPixeles):_) -> do
+            putStrLn $ "Etiqueta de la primera imagen: " ++ show primeraEtiqueta
+            putStrLn $ "Dimensiones del vector de la primera imagen: " ++ show (length primerosPixeles)
+        [] -> putStrLn "Error: El dataset está vacío."
