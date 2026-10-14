@@ -1,7 +1,7 @@
 module NeuralNet(
     NeuralNetwork(..),
     softmax,
-    fordwardPass,
+    forwardPass,
     predict
 ) where
 
@@ -22,8 +22,8 @@ softmax v =
         sumExps = sum exps
     in map (/ sumExps) exps
 
-fordwardPass :: NeuralNetwork -> Vector -> Vector
-fordwardPass (NeuralNetwork w1 b1 w2 b2) input =
+forwardPass :: NeuralNetwork -> Vector -> Vector
+forwardPass (NeuralNetwork w1 b1 w2 b2) input =
     let
         z1 = addVectors (matrixVectorMultiply w1 input) b1
         a1 = reluVector z1
@@ -33,7 +33,7 @@ fordwardPass (NeuralNetwork w1 b1 w2 b2) input =
 
 predict :: NeuralNetwork -> Vector -> Label
 predict nn input =
-    let probabilities = fordwardPass nn input
+    let probabilities = forwardPass nn input
         maxProb = maximum probabilities
     in case elemIndex maxProb probabilities of
         Just idx -> idx
