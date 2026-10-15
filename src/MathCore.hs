@@ -7,9 +7,18 @@ module MathCore (
     euclideanDistance,
     matrixVectorMultiply,
     addVectors,
+    subtractVectors,
     relu,
-    reluVector
+    reluVector,
+    oneHotEncode,
+    transposeMatrix,
+    reluDerivativeVector,
+    scalarMultiply,
+    scalarMultiplyMatrix,
+    outerProduct
 ) where
+
+import Data.List (transpose)
 
 type Vector = [Double]
 type Matrix = [[Double]]
@@ -33,3 +42,28 @@ relu x = max 0 x
 
 reluVector :: Vector -> Vector
 reluVector v = map relu v
+
+subtractVectors :: Vector -> Vector -> Vector
+subtractVectors u v = zipWith (-) u v
+
+oneHotEncode :: Int -> Label -> Vector
+oneHotEncode size label =
+    [if i == label then 1.0 else 0.0 | i <- [0..size - 1]]
+
+transposeMatrix :: Matrix -> Matrix
+transposeMatrix = transpose
+
+reluDerivative :: Double -> Double
+reluDerivative x = if x > 0 then 1.0 else 0.0
+
+reluDerivativeVector :: Vector -> Vector
+reluDerivativeVector v = map reluDerivative v
+
+scalarMultiply :: Double -> Vector -> Vector
+scalarMultiply scalar v = map (* scalar) v
+
+scalarMultiplyMatrix :: Double -> Matrix -> Matrix
+scalarMultiplyMatrix scalar m = map (scalarMultiply scalar) m
+
+outerProduct :: Vector -> Vector -> Matrix
+outerProduct u v = map (\x -> map (* x) v) u
