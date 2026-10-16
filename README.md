@@ -38,13 +38,3 @@ cabal run
 ```
 
 The execution will output the data loading progress, perform the Neural Network training loop over epochs (reporting accuracy), and finally run a side-by-side inference benchmark against the k-NN model.
-
-```
-
-Una vez que guardes el archivo, puedes registrar este cierre de proyecto en tu repositorio:
-
-```bash
-git add README.md
-git commit -m "docs: update README with backpropagation, Cabal setup, and complete feature list"
-
-```
